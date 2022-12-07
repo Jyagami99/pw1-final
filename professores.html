@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Professores</title>
+    <script src="./assets/js/scriptProfessores.js"></script>
+    <link rel="stylesheet" href="./assets/styles/professores.css" />
+  </head>
+  <body>
+    <div class="cabeçalho">
+      <h1>Instituição de Cursos - Professores</h1>
+    </div>
+    <div class="navbar">
+      <a href="./professores.html">Professores</a>
+      <a href="./disciplinas.html">Disciplinas</a>
+      <a href="./professoresDisciplinas.html">Professores-Disciplinas</a>
+    </div>
+    <div class="container">
+      <div class="submenu">
+        <div onclick="mostraCadastro()">Cadastrar um novo professor</div>
+        <div onclick="mostraProfessor()">Listar todos os professores</div>
+        <div onclick="listarEspecifico()">Listar um professor específico</div>
+        <div onclick="alteraEspecifico()">Altera um dado</div>
+        <div onclick="excluiEspecifico()">Excluir um dado</div>
+      </div>
+      <div class="conteudo">
+        <form class="formularioCadastro" name="searchfield" method="get">
+          <input
+            type="text"
+            id="registrof"
+            name="registrof"
+            placeholder="Registro Funcional"
+            required
+          />
+          <input
+            type="text"
+            id="nomec"
+            name="nomec"
+            placeholder="Nome completo"
+            required
+          />
+          <input
+            type="date"
+            id="datanasc"
+            name="datanasc"
+            placeholder="Data de nascimento"
+            required
+          />
+          <input
+            type="text"
+            id="sexo"
+            name="sexo"
+            placeholder="Sexo"
+            required
+          />
+          <input
+            type="text"
+            id="areap"
+            name="areap"
+            placeholder="Area de pesquisa"
+            required
+          />
+          <input
+            type="text"
+            id="universi"
+            name="universi"
+            placeholder="Universidade"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="tel"
+            id="telefone"
+            name="telefone"
+            minlength="10"
+            maxlength="11"
+            placeholder="Telefone"
+            required
+          />
+        </form>
+        <button id="botao" class="botao" onclick="cadastroProfessor()">
+          Cadastrar Professor
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

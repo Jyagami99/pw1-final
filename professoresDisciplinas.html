@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Professores por disciplina</title>
+    <script src="./assets/js/scriptProfDisciplinas.js"></script>
+    <link rel="stylesheet" href="./assets/styles/profdisci.css" />
+  </head>
+  <body>
+    <div class="cabeçalho">
+      <h1>Instituição de Cursos - Professores e Disciplinas</h1>
+    </div>
+    <div class="navbar">
+      <a href="./professores.html">Professores</a>
+      <a href="./disciplinas.html">Disciplinas</a>
+      <a href="./professoresDisciplinas.html">Professores-Disciplinas</a>
+    </div>
+    <div class="container">
+      <div class="submenu">
+        <div onclick="criarTabela()">Criar tabela</div>
+      </div>
+      <div class="conteudo">
+        <form class="formularioCadastro" name="searchfield" method="get">
+          <input
+            type="text"
+            id="registrof"
+            name="registrof"
+            placeholder="Registro Funcional"
+            required
+          />
+          <input
+            type="text"
+            id="sigla"
+            name="sigla"
+            placeholder="Sigla"
+            required
+          />
+          <input
+            type="text"
+            id="disciplina"
+            name="disciplina"
+            placeholder="Disciplina"
+            required
+          />
+          <input type="number" id="ano" name="ano" placeholder="Ano" required />
+          <input
+            type="number"
+            id="semestre"
+            name="semestre"
+            placeholder="Semestre"
+            required
+          />
+          <input
+            type="number"
+            id="diasemana"
+            name="diasemana"
+            placeholder="Dias da Semana"
+            required
+          />
+          <input
+            type="time"
+            id="horario"
+            name="horario"
+            placeholder="Horários de Início"
+            required
+          />
+          <button id="botao" class="botao" onclick="criarLinha()">
+            Cadastrar Dados
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
