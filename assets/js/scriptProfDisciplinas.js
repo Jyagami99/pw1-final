@@ -1,3 +1,9 @@
+let professoresStorage = localStorage.getItem("professoresStorage");
+let storageProfessores = JSON.parse(professoresStorage);
+
+let disciplinasStorage = localStorage.getItem("disciplinasStorage");
+let storageDisciplinas = JSON.parse(disciplinasStorage);
+
 function criarTabela() {
   let objTable = document.createElement("table");
   let objTHead = document.createElement("thead");
@@ -53,57 +59,60 @@ function criarTabela() {
 }
 
 function criarLinha() {
-  let tbody1 = document.getElementById("tb1");
-  let objetoTr = document.createElement("tr");
-  let objTd1 = document.createElement("td");
-  let objTxt1 = document.createTextNode(
-    document.getElementById("registrof").value
-  );
+  if (storageProfessores || storageDisciplinas) {
+    let tbody1 = document.getElementById("tb1");
+    let objetoTr = document.createElement("tr");
+    let objTd1 = document.createElement("td");
+    let objTxt1 = document.createTextNode(
+      document.getElementById("registrof").value
+    );
 
-  objTd1.appendChild(objTxt1);
+    objTd1.appendChild(objTxt1);
 
-  let objTd2 = document.createElement("td");
-  let objTxt2 = document.createTextNode(document.getElementById("sigla").value);
+    let objTd2 = document.createElement("td");
+    let objTxt2 = document.createTextNode(
+      document.getElementById("sigla").value
+    );
 
-  objTd2.appendChild(objTxt2);
+    objTd2.appendChild(objTxt2);
 
-  let objTd3 = document.createElement("td");
-  let objTxt3 = document.createTextNode(document.getElementById("ano").value);
+    console.log(objTd2);
 
-  objTd3.appendChild(objTxt3);
+    let objTd3 = document.createElement("td");
+    let objTxt3 = document.createTextNode(document.getElementById("ano").value);
 
-  let objTd4 = document.createElement("td");
-  let objTxt4 = document.createTextNode(
-    document.getElementById("semestre").value
-  );
+    objTd3.appendChild(objTxt3);
 
-  objTd4.appendChild(objTxt4);
+    let objTd4 = document.createElement("td");
+    let objTxt4 = document.createTextNode(
+      document.getElementById("semestre").value
+    );
 
-  let objTd5 = document.createElement("td");
-  let objTxt5 = document.createTextNode(
-    document.getElementById("diasemana").value
-  );
+    objTd4.appendChild(objTxt4);
 
-  objTd5.appendChild(objTxt5);
+    let objTd5 = document.createElement("td");
+    let objTxt5 = document.createTextNode(
+      document.getElementById("diasemana").value
+    );
 
-  let objTd6 = document.createElement("td");
-  let objTxt6 = document.createTextNode(
-    document.getElementById("horario").value
-  );
+    objTd5.appendChild(objTxt5);
 
-  objTd6.appendChild(objTxt6);
+    let objTd6 = document.createElement("td");
+    let objTxt6 = document.createTextNode(
+      document.getElementById("horario").value
+    );
 
-  objetoTr.appendChild(objTd1);
-  objetoTr.appendChild(objTd2);
-  objetoTr.appendChild(objTd3);
-  objetoTr.appendChild(objTd4);
-  objetoTr.appendChild(objTd5);
-  objetoTr.appendChild(objTd6);
+    objTd6.appendChild(objTxt6);
 
-  tbody1.appendChild(objetoTr);
-}
+    objetoTr.appendChild(objTd1);
+    objetoTr.appendChild(objTd2);
+    objetoTr.appendChild(objTd3);
+    objetoTr.appendChild(objTd4);
+    objetoTr.appendChild(objTd5);
+    objetoTr.appendChild(objTd6);
 
-function fodase() {
-  console.log(arrayProfessores);
-  console.log(arrayDisciplinas);
+    tbody1.appendChild(objetoTr);
+  } else {
+    alert("Não há professores ou disciplinas cadastradas no momento!");
+  }
 }
