@@ -38,7 +38,7 @@ function criarTabela() {
   objetoTrh.appendChild(objTh4);
   objetoTrh.appendChild(objTh5);
   objetoTrh.appendChild(objTh6);
-  
+
   objTHead.appendChild(objetoTrh);
   objTable.appendChild(objTHead);
 
@@ -101,4 +101,9 @@ function criarLinha() {
   objetoTr.appendChild(objTd6);
 
   tbody1.appendChild(objetoTr);
+}
+
+function fodase() {
+  console.log(arrayProfessores);
+  console.log(arrayDisciplinas);
 }

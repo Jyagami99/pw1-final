@@ -1,6 +1,9 @@
 let arrayProfessores = [];
 
 function cadastroProfessor() {
+  let storage = localStorage.getItem("professoresStorage");
+  // console.log(storage);
+
   let professores = {
     RegistroFuncional: document.getElementById("registrof").value,
     NomeCompleto: document.getElementById("nomec").value,
@@ -31,34 +34,43 @@ function cadastroProfessor() {
 
   if (cadastro == -1) {
     arrayProfessores.push(Object.values(professores));
-    alert("Cadastro realizado com sucesso!");
+    localStorage.setItem(
+      "professoresStorage",
+      JSON.stringify(arrayProfessores)
+    );
+    alert("Cadasro realizado com sucessot!");
   } else {
     alert("Professor já está cadastrado no sistema!");
   }
 }
 
 function mostraProfessor() {
-  if (arrayProfessores.length > 0) {
+  let storage = localStorage.getItem("professoresStorage");
+  // console.log(storage);
+
+  // if (arrayProfessores.length > 0) {
+  if (storage) {
+    let storageProfessores = JSON.parse(storage);
     let listaDeProfessores = "";
 
-    for (let i = 0; i < arrayProfessores.length; i++) {
+    for (let i = 0; i < storageProfessores.length; i++) {
       listaDeProfessores += ` 
       <p>
-        Registro Funcional: ${arrayProfessores[i][0]} 
+        Registro Funcional: ${storageProfessores[i][0]} 
         <br>
-        Nome Completo:  ${arrayProfessores[i][1]}
+        Nome Completo:  ${storageProfessores[i][1]}
         <br>
-        Data de Nascimento: ${arrayProfessores[i][2]}
+        Data de Nascimento: ${storageProfessores[i][2]}
         <br>
-          Sexo: ${arrayProfessores[i][3]} 
+          Sexo: ${storageProfessores[i][3]} 
         <br>
-        Área de Pesquisa: ${arrayProfessores[i][4]} 
+        Área de Pesquisa: ${storageProfessores[i][4]} 
         <br>
-        Universidade: ${arrayProfessores[i][5]} 
+        Universidade: ${storageProfessores[i][5]} 
         <br>
-        Email:  ${arrayProfessores[i][6]} 
+        Email:  ${storageProfessores[i][6]} 
         <br>
-        Telefone: ${arrayProfessores[i][7]}
+        Telefone: ${storageProfessores[i][7]}
       </p>`;
     }
     document.querySelector(".conteudo").innerHTML = listaDeProfessores;
@@ -68,37 +80,44 @@ function mostraProfessor() {
 }
 
 function pesquisarPorRF() {
+  let storage = localStorage.getItem("professoresStorage");
+  let storageProfessores = JSON.parse(storage);
   let registroFuncional = document.getElementById(
     "registroFuncionalEspecifico"
   ).value;
   let conteudo = document.querySelector(".conteudo");
 
-  if (registroFuncional.length !== 0) {
-    for (let i = 0; i < arrayProfessores.length; i++) {
-      if (arrayProfessores[i][0] === registroFuncional) {
+  // if (registroFuncional.length !== 0) {
+  // console.log(storageProfessores.length);
+  if (storageProfessores) {
+    for (let i = 0; i < storageProfessores.length; i++) {
+      if (storageProfessores[i][0] === registroFuncional) {
         conteudo.innerHTML = `
         <p>
-          Registro Funcional: ${arrayProfessores[i][0]} 
+          Registro Funcional: ${storageProfessores[i][0]} 
           <br>
-          Nome Completo:  ${arrayProfessores[i][1]}
+          Nome Completo:  ${storageProfessores[i][1]}
           <br>
-          Data de Nascimento: ${arrayProfessores[i][2]}
+          Data de Nascimento: ${storageProfessores[i][2]}
           <br>
-            Sexo: ${arrayProfessores[i][3]} 
+            Sexo: ${storageProfessores[i][3]} 
           <br>
-          Área de Pesquisa: ${arrayProfessores[i][4]} 
+          Área de Pesquisa: ${storageProfessores[i][4]} 
           <br>
-          Universidade: ${arrayProfessores[i][5]} 
+          Universidade: ${storageProfessores[i][5]} 
           <br>
-          Email:  ${arrayProfessores[i][6]} 
+          Email:  ${storageProfessores[i][6]} 
           <br>
-          Telefone: ${arrayProfessores[i][7]}
+          Telefone: ${storageProfessores[i][7]}
         </p>`;
+        break;
+      } else {
+        alert("Insira um RF válido!");
         break;
       }
     }
   } else {
-    alert("Insira um RF válido!");
+    alert("Não há professores cadastrados!");
   }
 }
 
@@ -188,14 +207,22 @@ function mostraCadastro() {
 }
 
 function excluiDado() {
+  let storage = localStorage.getItem("professoresStorage");
+  let storageProfessores = JSON.parse(storage);
   let registroFuncional = document.getElementById(
     "registroFuncionalEspecifico"
   ).value;
 
-  if (registroFuncional.length !== 0) {
-    for (let i = 0; i < arrayProfessores.length; i++) {
-      if (arrayProfessores[i][0] === registroFuncional) {
-        arrayProfessores.splice(i, 1);
+  // if (registroFuncional.length !== 0) {
+  if (storageProfessores) {
+    for (let i = 0; i < storageProfessores.length; i++) {
+      if (storageProfessores[i][0] === registroFuncional) {
+        storageProfessores.splice(i, 1);
+        // console.log(storageProfessores);
+        localStorage.setItem(
+          "professoresStorage",
+          JSON.stringify(storageProfessores)
+        );
         alert(
           `O professor com RF ${registroFuncional} foi deletado do sistema!`
         );
@@ -203,7 +230,7 @@ function excluiDado() {
       }
     }
   } else {
-    alert("Insira um RF válido!");
+    alert("Não há professores cadastrados!");
   }
 }
 
@@ -223,7 +250,9 @@ function excluiEspecifico() {
   `;
 }
 
-function atualizaCadastro() {
+function atualizaCadastro(rf) {
+  let storage = localStorage.getItem("professoresStorage");
+  let storageProfessores = JSON.parse(storage);
   let dados = {
     NomeCompleto: document.getElementById("nomec").value,
     DataDeNascimento: document.getElementById("datanasc").value,
@@ -234,25 +263,34 @@ function atualizaCadastro() {
     Telefone: document.getElementById("telefone").value,
   };
 
-  let registroFuncional = document.getElementById(
-    "registroFuncionalEspecifico"
-  ).value;
+  let registroFuncional = rf;
+  // let registroFuncional = document.getElementById(
+  //   "registroFuncionalEspecifico"
+  // ).value;
+  // console.log(registroFuncional);
+  console.log(storageProfessores);
+  console.log(storageProfessores.length);
 
-  for (let i = 0; i < arrayProfessores.length; i++) {
-    if (arrayProfessores[i][0] === registroFuncional) {
-      arrayProfessores[i].splice(1, 1, dados.NomeCompleto);
-      arrayProfessores[i].splice(2, 1, dados.DataDeNascimento);
-      arrayProfessores[i].splice(3, 1, dados.Sexo);
-      arrayProfessores[i].splice(4, 1, dados.AreaPesquisa);
-      arrayProfessores[i].splice(5, 1, dados.Universidade);
-      arrayProfessores[i].splice(6, 1, dados.Email);
-      arrayProfessores[i].splice(7, 1, dados.Telefone);
+  for (let i = 0; i < storageProfessores.length; i++) {
+    if (storageProfessores[i][0] == registroFuncional) {
+      storageProfessores[i].splice(1, 1, dados.NomeCompleto);
+      storageProfessores[i].splice(2, 1, dados.DataDeNascimento);
+      storageProfessores[i].splice(3, 1, dados.Sexo);
+      storageProfessores[i].splice(4, 1, dados.AreaPesquisa);
+      storageProfessores[i].splice(5, 1, dados.Universidade);
+      storageProfessores[i].splice(6, 1, dados.Email);
+      storageProfessores[i].splice(7, 1, dados.Telefone);
+
+      localStorage.setItem(
+        "professoresStorage",
+        JSON.stringify(storageProfessores)
+      );
       break;
     }
   }
 }
 
-function exibeDadosProfessor() {
+function exibeDadosProfessor(rf) {
   let conteudo = document.querySelector(".conteudo");
   conteudo.innerHTML = `
   <form class="formularioCadastro" name="searchfield" method="put">
@@ -261,6 +299,7 @@ function exibeDadosProfessor() {
       id="registrof"
       name="registrof"
       placeholder="Registro Funcional"
+      value=${rf}
       disabled
       required
     />  
@@ -316,21 +355,25 @@ function exibeDadosProfessor() {
       required
     />
   </form>
-  <button id="botao" class="botao" onclick="atualizaCadastro()">
+  <button id="botao" class="botao" onclick="atualizaCadastro(${rf})">
     Altera dado do Professor
   </button>
   `;
 }
 
 function alteraDado() {
+  let storage = localStorage.getItem("professoresStorage");
+  let storageProfessores = JSON.parse(storage);
   let registroFuncional = document.getElementById(
     "registroFuncionalEspecifico"
   ).value;
+  console.log(registroFuncional);
 
-  if (registroFuncional.length !== 0) {
-    for (let i = 0; i < arrayProfessores.length; i++) {
-      if (arrayProfessores[i][0] === registroFuncional) {
-        exibeDadosProfessor();
+  // if (registroFuncional.length !== 0) {
+  if (storageProfessores) {
+    for (let i = 0; i < storageProfessores.length; i++) {
+      if (storageProfessores[i][0] === registroFuncional) {
+        exibeDadosProfessor(registroFuncional);
         break;
       }
     }
@@ -350,7 +393,7 @@ function alteraEspecifico() {
       placeholder="Digite o RF que deseja alterar"
       required
     />
-    <button onclick="alteraDado()">Pesquisar</button>
+    <button id="botao" class="botao" onclick="alteraDado()">Pesquisar</button>
   </div>
   `;
 }
