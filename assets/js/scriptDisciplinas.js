@@ -192,3 +192,37 @@ function excluiEspecifico() {
   </div>
   `;
 }
+
+function alteraDados() {
+  let storage = localStorage.getItem("disciplinaStorage");
+  let storageDisciplina = JSON.parse(storage);
+  let sigla = document.getElementById("siglaEspecifica").value;
+  console.log(sigla);
+
+  if (storageDisciplina) {
+    for (let i = 0; i < storageDisciplina.length; i++) {
+      if (storageDisciplina[i][0] === sigla) {
+        mostraCadastro(sigla);
+        break;
+      }
+    }
+  } else {
+    alert("Insira uma sigla válida!");
+  }
+}
+
+function alteraEspecifico() {
+  let conteudo = document.querySelector(".conteudo");
+  conteudo.innerHTML = `
+  <div class="pesquisaEspecifica">
+    <input
+      type="text"
+      class="siglaEspecifica"
+      id="siglaEspecifica"
+      placeholder="Digite a sigla que deseja alterar"
+      required
+    />
+    <button id="botao" class="botao" onclick="alteraDados()">Pesquisar</button>
+  </div>
+  `;
+}
