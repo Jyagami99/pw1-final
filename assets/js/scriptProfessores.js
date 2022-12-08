@@ -38,7 +38,7 @@ function cadastroProfessor() {
       "professoresStorage",
       JSON.stringify(arrayProfessores)
     );
-    alert("Cadasro realizado com sucessot!");
+    alert("Cadastro realizado com sucesso!");
   } else {
     alert("Professor já está cadastrado no sistema!");
   }
@@ -264,10 +264,7 @@ function atualizaCadastro(rf) {
   };
 
   let registroFuncional = rf;
-  // let registroFuncional = document.getElementById(
-  //   "registroFuncionalEspecifico"
-  // ).value;
-  // console.log(registroFuncional);
+
   console.log(storageProfessores);
   console.log(storageProfessores.length);
 
@@ -367,7 +364,6 @@ function alteraDado() {
   let registroFuncional = document.getElementById(
     "registroFuncionalEspecifico"
   ).value;
-  console.log(registroFuncional);
 
   // if (registroFuncional.length !== 0) {
   if (storageProfessores) {
